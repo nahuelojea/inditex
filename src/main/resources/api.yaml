@@ -1,0 +1,110 @@
+openapi: 3.0.3
+info:
+  title: ms_inditex_v1
+  description: Inditex service by Nahuel Ariel Ojea
+  version: 1.0.0
+
+paths:
+  /price:
+    get:
+      operationId: getPrice
+      description: This service return price
+      parameters:
+        - in: query
+          name: applicationDate
+          description: Product price application date. Format yyyy-MM-ddTHH:mm:ss.SSSZ
+          required: true
+          schema:
+            type: string
+            format: date-time
+            example: "2020-06-14T19:13:14.903Z"
+        - in: query
+          name: productId
+          description: Product identifier
+          required: true
+          schema:
+            type: string
+            minLength: 5
+            maxLength: 5
+        - in: query
+          name: brandId
+          description: Brand identifier
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1
+      responses:
+        200:
+          $ref: '#/components/responses/price_response'
+        400:
+          $ref: '#/components/responses/bad_request'
+        500:
+          $ref: '#/components/responses/internal_error'
+
+components:
+  responses:
+    price_response:
+      description: In case the price has been returned correctly.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              product_prices:
+                type: array
+                items:
+                  $ref: '#/components/schemas/product_price'
+    bad_request:
+      description: In case the necessary data to get the prices is not sent or they have an incorrect format.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error_response'
+    internal_error:
+      description: In case of a general error on the server.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error_response'
+
+  schemas:
+    product_price:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: Product identifier
+        brand_id:
+          type: string
+          description: Brand identifier
+        price_list:
+          type: integer
+          description: Price list to apply
+        start_date:
+          type: string
+          description: Product price application start date
+        end_date:
+          type: string
+          description: Product price application end date
+        price:
+          type: number
+          format: currency
+          description: Product price
+    error_response:
+      type: object
+      properties:
+        error:
+          required:
+            - message
+            - request_id
+          type: object
+          properties:
+            message:
+              type: string
+            request_id:
+              type: string
+            details:
+              type: string
+            code:
+              type: integer
