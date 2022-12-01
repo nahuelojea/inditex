@@ -14,7 +14,7 @@ Firstly, we should define principles to divide our code. As explained briefly al
 freestar
 What we'll do instead is divide our application into three layers; application (outside), domain (inside), and infrastructure (outside):
 
-![img.png](img.png)
+![img.png](src/main/resources/img.png)
 
 Through the application layer, the user or any other program interacts with the application. This area should contain things like user interfaces, RESTful controllers, and JSON serialization libraries. It includes anything that exposes entry to our application and orchestrates the execution of domain logic.
 
@@ -30,7 +30,12 @@ More information in the following link:
 
 This project has an H2 in-memory database. We will persist the initial data for testing.
 
+In order to access the data we must login in at the following link with the data we see in the image.
+
 - [H2 console](http://localhost:8081/h2-console)
+
+
+![h2db.png](src/main/resources/h2db.png)
 
 ### Documentation
 
@@ -53,5 +58,21 @@ Create Docker image:
 Run Docker container:
 
 ```
- docker run -p8887:8888 inditex:latest
+ docker run -p8081:8081 inditex:latest
+```
+
+## REST Request example
+
+![Example.png](src/main/resources/Example.png)
+
+Curl:
+```
+ curl -X 'GET' \
+  'http://localhost:8081/price?applicationDate=2020-06-14T10%3A00%3A00.000Z&productId=35455&brandId=1' \
+  -H 'accept: application/json'
+```
+
+Request URL:
+```
+http://localhost:8081/price?applicationDate=2020-06-14T10%3A00%3A00.000Z&productId=35455&brandId=1
 ```
