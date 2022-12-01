@@ -76,3 +76,26 @@ Request URL:
 ```
 http://localhost:8081/price?applicationDate=2020-06-14T10%3A00%3A00.000Z&productId=35455&brandId=1
 ```
+
+More examples:
+
+```
+ curl -X 'GET' \
+  'http://localhost:8081/price?applicationDate=2020-06-14T16%3A00%3A00.000Z&productId=35455&brandId=1' \
+  -H 'accept: application/json'
+```
+```
+ curl -X 'GET' \
+  'http://localhost:8081/price?applicationDate=2020-06-14T21%3A00%3A00.000Z&productId=35455&brandId=1' \
+  -H 'accept: application/json'
+```
+```
+ curl -X 'GET' \
+  'http://localhost:8081/price?applicationDate=2020-06-15T10%3A00%3A00.000Z&productId=35455&brandId=1' \
+  -H 'accept: application/json'
+```
+```
+ curl -X 'GET' \
+  'http://localhost:8081/price?applicationDate=2020-06-16T21%3A00%3A00.000Z&productId=35455&brandId=1' \
+  -H 'accept: application/json'
+```
