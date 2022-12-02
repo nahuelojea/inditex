@@ -50,6 +50,11 @@ The OpenAPI maven plugin was used for the code generation
 
 ## Run Spring Boot application with Docker
 
+Compile application:
+```
+ mvn clean install
+```
+
 Create Docker image:
 ```
  docker build --tag=inditex:latest .
